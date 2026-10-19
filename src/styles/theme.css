@@ -1,0 +1,123 @@
+/* ═══════════════════════════════════════════════════════════════
+   IROKO — SYSTÈME DE THÈME CLAIR / SOMBRE
+   Triplets RGB → compatibles modificateurs Tailwind v4 (/50, /12…)
+   Aucun mode système. Clair = défaut. Sombre = data-theme="dark".
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── 1. TOKENS FIXES (identiques dans tous les modes) ────────── */
+:root {
+  /* Header : pilule blanche, jamais modifiée */
+  --header-bg:        255 255 255;   /* #FFFFFF */
+  --header-fg:        10  11  20;    /* #0A0B14 */
+  --header-btn-bg:    247 242 239;   /* #F7F2EF — bouton rond Globe, Search, Theme */
+
+  /* Footer : fond charbon fixe */
+  --footer-bg:        22  22  22;    /* #161616 */
+  --footer-fg:        255 255 255;   /* #FFFFFF */
+
+  /* Texte sur photo (badges et légendes posées sur images) */
+  --on-photo:         255 255 255;   /* #FFFFFF — jamais tokenisé sombre */
+
+  /* Cartes méthode : fonds fixes, identiques dans les deux modes */
+  --method-violet:       83  31 245;   /* #531FF5 — carte 1 */
+  --method-cream:       247 245 242;   /* #F7F5F2 — cartes 2 & CTA */
+  --method-orange:      255 133   0;   /* #FF8500 — carte 3 */
+  --method-violet-light: 139 102 255;  /* #8B66FF — carte 4 */
+  --method-ink:          10  11  20;   /* #0A0B14 — carte 5 fond */
+  --method-lilac:       217 204 255;   /* #D9CCFF — accent carte 1 */
+}
+
+/* ─── 2. MODE CLAIR (:root + [data-theme="light"]) ────────────── */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Fonds */
+  --bg:           255 255 255;   /* #FFFFFF */
+  --bg-alt:       247 245 242;   /* #F7F5F2 — bandeau stats, appel final */
+
+  /* Surfaces (cartes + cadres institutionnels) */
+  --surface:      255 255 255;   /* #FFFFFF — cartes avec bordure + ombre */
+  --surface-tint: 241 238 255;   /* #F1EEFF — carte IROKO Event, cadres violet pâle */
+
+  /* Texte */
+  --fg:           10  11  20;    /* #0A0B14 — ratio ≥ 21:1 sur blanc */
+  --fg-muted:     91  95 110;    /* #5B5F6E — ratio ≥ 5.5:1 sur blanc */
+
+  /* Bordures & filets */
+  --line:         10  11  20;    /* #0A0B14 — utiliser en /12 → rgba(10,11,20,.12) */
+
+  /* Primaire violet */
+  --primary:       83  31 245;   /* #531FF5 — fond bouton */
+  --primary-hover: 67  18 212;   /* #4312D6 */
+  --primary-on:   255 255 255;   /* #FFFFFF — texte sur bouton violet */
+  --primary-text:  83  31 245;   /* #531FF5 — liens, ratio 7.0:1 sur blanc */
+
+  /* Accent orange */
+  --accent:       255 133   0;   /* #FF8500 — fond pastille */
+  --accent-text:  168  77   0;   /* #A84D00 — texte orange sur clair, ratio 5.6:1 */
+  --accent-on:     10  11  20;   /* #0A0B14 — texte sur fond orange */
+
+  /* Statut succès */
+  --success-bg:    16 185 129;   /* #10B981 */
+  --success-on:    10  11  20;   /* #0A0B14 — ratio 7.7:1 sur vert */
+  --success-text:  15 122  75;   /* #0F7A4B — ratio ≥ 4.8:1 sur blanc */
+}
+
+/* ─── 3. MODE SOMBRE ([data-theme="dark"]) ────────────────────── */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Fonds */
+  --bg:           8  12  20;    /* #080C14 */
+  --bg-alt:      22  22  22;    /* #161616 — bandeau stats, appel final */
+
+  /* Surfaces */
+  --surface:     13  27  62;    /* #0D1B3E — cartes, cadres */
+  --surface-tint: 13  27  62;   /* #0D1B3E */
+
+  /* Texte */
+  --fg:          255 255 255;   /* #FFFFFF */
+  --fg-muted:    163 169 188;   /* #A3A9BC — ratio ≥ 6.2:1 */
+
+  /* Bordures & filets */
+  --line:        255 255 255;   /* #FFFFFF — utiliser en /10 */
+
+  /* Primaire violet */
+  --primary:       83  31 245;   /* #531FF5 */
+  --primary-hover: 106  66 255;  /* #6A42FF */
+  --primary-on:   255 255 255;   /* #FFFFFF */
+  --primary-text: 165 139 255;   /* #A58BFF — ratio ≥ 6.2:1 sur #080C14 */
+
+  /* Accent orange */
+  --accent:       255 133   0;   /* #FF8500 */
+  --accent-text:  255 133   0;   /* #FF8500 — ratio ≥ 8.0:1 sur #080C14 */
+  --accent-on:     10  11  20;   /* #0A0B14 */
+
+  /* Statut succès */
+  --success-bg:    16 185 129;   /* #10B981 */
+  --success-on:    10  11  20;   /* #0A0B14 */
+  --success-text:  52 211 153;   /* #34D399 — ratio ≥ 7.6:1 sur #080C14 */
+}
+
+/* ─── 4. TRANSITIONS FLUIDES DU THÈME ────────────────────────── */
+/* 200 ms uniquement sur les propriétés de couleur, jamais transition:all
+   Désactivé sur les éléments que GSAP anime déjà (éviter le double animateur)
+   Désactivé en mouvement réduit */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition-property: background-color, color, border-color, fill, stroke !important;
+  transition-duration: 200ms !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transitioning,
+  html.theme-transitioning *,
+  html.theme-transitioning *::before,
+  html.theme-transitioning *::after {
+    transition: none !important;
+  }
+}

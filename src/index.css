@@ -1,0 +1,212 @@
+@import "tailwindcss";
+@import "./styles/theme.css";
+
+/* ═══════════════════════════════════════════════════════════════
+   @theme inline : OBLIGATOIRE en Tailwind v4 pour que les tokens
+   restent des références CSS dynamiques (var(--bg)) et non des
+   valeurs résolues au build. Sans "inline", data-theme="dark"
+   n'aurait aucun effet sur les cartes hero / footer.
+   ═══════════════════════════════════════════════════════════════ */
+@theme inline {
+  /* ── Typographies ── */
+  --font-sans:    "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-cursive: "Satisfy", cursive;
+
+  /* ── Tokens sémantiques → classes Tailwind (bg-bg, text-fg…) ── */
+  --color-bg:           rgb(var(--bg));
+  --color-bg-alt:       rgb(var(--bg-alt));
+  --color-surface:      rgb(var(--surface));
+  --color-surface-tint: rgb(var(--surface-tint));
+
+  --color-fg:           rgb(var(--fg));
+  --color-fg-muted:     rgb(var(--fg-muted));
+  --color-line:         rgb(var(--line));
+
+  --color-primary:      rgb(var(--primary));
+  --color-primary-hover: rgb(var(--primary-hover));
+  --color-primary-on:   rgb(var(--primary-on));
+  --color-primary-text: rgb(var(--primary-text));
+
+  --color-accent:       rgb(var(--accent));
+  --color-accent-text:  rgb(var(--accent-text));
+  --color-accent-on:    rgb(var(--accent-on));
+
+  --color-success-bg:   rgb(var(--success-bg));
+  --color-success-on:   rgb(var(--success-on));
+  --color-success-text: rgb(var(--success-text));
+
+  /* ── Tokens fixes header / footer / boutons ronds ── */
+  --color-header-bg:     rgb(var(--header-bg));
+  --color-header-fg:     rgb(var(--header-fg));
+  --color-header-btn-bg: rgb(var(--header-btn-bg));
+  --color-footer-bg:     rgb(var(--footer-bg));
+  --color-footer-fg:     rgb(var(--footer-fg));
+  --color-on-photo:      rgb(var(--on-photo));
+
+  /* ── Tokens fixes cartes Méthode ── */
+  --color-method-violet:        rgb(var(--method-violet));
+  --color-method-cream:         rgb(var(--method-cream));
+  --color-method-orange:        rgb(var(--method-orange));
+  --color-method-violet-light:  rgb(var(--method-violet-light));
+  --color-method-ink:           rgb(var(--method-ink));
+  --color-method-lilac:         rgb(var(--method-lilac));
+
+  /* ── Alias de migration (anciens noms → nouveaux tokens) ──────
+     Gardés pendant la migration pour éviter toute régression.
+     Chaque alias pointe vers le token sémantique correspondant.
+     Un grep final prouvera qu'il n'en reste aucun dans le code.
+     ─────────────────────────────────────────────────────────── */
+
+  /* Anciens fonds de page / cartes */
+  --color-page-bg:      rgb(var(--bg));          /* bg-page-bg → bg-bg */
+  --color-card-bg:      rgb(var(--surface));      /* bg-card-bg → bg-surface */
+  --color-card-surface: rgb(var(--surface));
+  --color-card-border:  rgb(var(--line));
+
+  /* Anciens alias KTV (héritage KTV Business Group) */
+  --color-ktv-black:    rgb(var(--bg));           /* bg-ktv-black → bg-bg */
+  --color-ktv-blue:     rgb(var(--surface));      /* bg-ktv-blue → bg-surface */
+  --color-ktv-red:      rgb(var(--primary));      /* text-ktv-red → text-primary */
+  --color-ktv-orange:   rgb(var(--accent));       /* text-ktv-orange → text-accent-text */
+  --color-ktv-black-text: rgb(var(--fg));         /* text-ktv-black → text-fg */
+
+  /* Anciens alias de recherche / badge */
+  --color-search-bg:       #F7F2EF;              /* champs nav — fixe */
+  --color-badge-green:     #10B981;              /* fixe */
+  --color-badge-green-bg:  rgba(16,185,129,.15); /* fixe */
+
+  /* Anciens noms de marque */
+  --color-primary-light:    #8B66FF;
+  --color-secondary:        #FF8500;
+  --color-secondary-hover:  #e65c00;
+  --color-ink:              #0A0B14;
+  --color-footer-dark:      #161616;
+  --color-violet-primary:   rgb(var(--primary));
+  --color-violet-light:     #8B66FF;
+  --color-orange-accent:    #FF8500;
+  --color-accent-orange:    #FF8500;
+
+  /* ── Tokens FIXES cartes Méthode (hex bruts, inchangés) ─────── */
+  --color-method-c1-bg:     #531FF5;
+  --color-method-c1-text:   #FFFFFF;
+  --color-method-c1-accent: #D9CCFF;
+  --color-method-c2-bg:     #F7F5F2;
+  --color-method-c2-text:   #0A0B14;
+  --color-method-c2-accent: #531FF5;
+  --color-method-c3-bg:     #FF8500;
+  --color-method-c3-text:   #0A0B14;
+  --color-method-c3-accent: #0A0B14;
+  --color-method-c4-bg:     #8B66FF;
+  --color-method-c4-text:   #0A0B14;
+  --color-method-c4-accent: #0A0B14;
+  --color-method-c5-bg:     #0A0B14;
+  --color-method-c5-text:   #FFFFFF;
+  --color-method-c5-accent: #FF8500;
+  --color-method-cta-bg:    #F7F5F2;
+  --color-method-cta-text:  #0A0B14;
+  --color-method-cta-accent:#531FF5;
+}
+
+/* ─── Base : fond et texte suivent le thème ────────────────────── */
+@layer base {
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-bg text-fg;
+  }
+
+  /* Sélection de texte */
+  ::selection {
+    background-color: rgb(var(--primary) / 0.18);
+    color: rgb(var(--fg));
+  }
+
+  /* Focus clavier (outline primary 2 px, offset 2 px) */
+  :focus-visible {
+    outline: 2px solid rgb(var(--primary));
+    outline-offset: 2px;
+  }
+
+  /* Barre de défilement — suit le thème */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--line) / 0.18);
+    border-radius: 3px;
+  }
+}
+
+/* ─── Utilitaires de dégradés de marque ────────────────────────── */
+/* NB : ces dégradés sont FIXES (ils s'appliquent sur fond sombre ou
+   sur des surfaces fixes — boutons, badges). Ne les utilisez pas
+   comme fond de page ou de section. */
+.bg-gradient-blend {
+  background: linear-gradient(135deg, #531FF5 0%, #FF6B00 100%);
+}
+
+/* Dégradés texte — sens adapté selon le thème :
+   clair : violet → brun-orange (#531FF5 → #A84D00)
+   sombre : violet clair → orange (#9b72ff → #FF7A00) */
+[data-theme="light"] .text-gradient-blend {
+  background: linear-gradient(135deg, #531FF5 0%, #A84D00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+[data-theme="dark"] .text-gradient-blend,
+:root:not([data-theme="light"]) .text-gradient-blend {
+  background: linear-gradient(135deg, #9b72ff 0%, #FF7A00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .text-gradient-violet-orange {
+  background: linear-gradient(90deg, #531FF5 0%, #A84D00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+[data-theme="dark"] .text-gradient-violet-orange,
+:root:not([data-theme="light"]) .text-gradient-violet-orange {
+  background: linear-gradient(90deg, #7b4eff 0%, #FF6B00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.border-gradient-blend {
+  border-image: linear-gradient(135deg, #531FF5, #FF6B00) 1;
+}
+
+/* ─── Utilitaires typographie ───────────────────────────────────── */
+.font-cursive {
+  font-family: "Satisfy", cursive !important;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ─── Formes des cartes Méthode (clip-path, masque) ────────────── */
+.method-chamfer-tr {
+  clip-path: polygon(0 0, calc(100% - 44px) 0, 100% 44px, 100% 100%, 0 100%);
+}
+.method-chamfer-bl {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 44px 100%, 0 calc(100% - 44px));
+}
+.method-chamfer-tl {
+  clip-path: polygon(44px 0, 100% 0, 100% 100%, 0 100%, 0 44px);
+}
+.method-chamfer-br {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 44px), calc(100% - 44px) 100%, 0 100%);
+}
+
+.method-card-notch {
+  -webkit-mask-image: radial-gradient(circle 12px at 0px 70px, transparent 11.5px, black 12px);
+  mask-image: radial-gradient(circle 12px at 0px 70px, transparent 11.5px, black 12px);
+}

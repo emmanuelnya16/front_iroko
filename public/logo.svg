@@ -1,0 +1,16 @@
+<svg width="120" height="56" viewBox="0 0 120 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- IROKO Tree Branch Monogram -->
+  <g transform="translate(4, 8)">
+    <!-- Base trunk -->
+    <rect x="2" y="8" width="10" height="24" rx="2" fill="#531FF5" />
+    <!-- Branch angle -->
+    <path d="M12 16L24 6V14L14 22V16Z" fill="#8B66FF" />
+    <path d="M12 24L24 34V26L14 18V24Z" fill="#531FF5" />
+    <!-- Orange Connection Dot -->
+    <circle cx="25" cy="5" r="4.5" fill="#FF8500" />
+  </g>
+  
+  <!-- IROKO GROUP Typography -->
+  <text x="44" y="27" font-family="'Inter Tight', sans-serif" font-size="20" font-weight="800" letter-spacing="-0.03em" fill="#0A0B14">IROKO</text>
+  <text x="44" y="40" font-family="'Inter Tight', sans-serif" font-size="9" font-weight="600" letter-spacing="0.28em" fill="#6B7280">GROUP</text>
+</svg>

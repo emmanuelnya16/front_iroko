@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IROKO GROUP — Holding & Pôles d'Activités d'Excellence</title>
+    <meta name="description" content="Site officiel du Groupe IROKO : holding structurée en trois familles d'activités, pôle IROKO Event d'exception, méthode rigoureuse et demandes de devis." />
+    <meta property="og:title" content="IROKO GROUP — Bâtir des synergies durables, orchestrer l'excellence" />
+    <meta property="og:description" content="Holding et groupe de dix pôles d'activité structurés en trois familles : Business, Digital, Services &amp; Support." />
+    <meta name="theme-color" content="#FFFFFF" />
+    <!--
+      STYLE CRITIQUE ANTI-FLASH : appliqué AVANT tout CSS Tailwind.
+      Garantit qu'aucun fond blanc ne clignote en mode sombre
+      (ni l'inverse) pendant que le bundle JS se charge.
+    -->
+    <style>
+      html                         { background-color: #FFFFFF; color: #0A0B14; }
+      html[data-theme="dark"]      { background-color: #080C14; color: #FFFFFF; }
+    </style>
+    <!--
+      SCRIPT ANTI-FLASH : lit localStorage AVANT React et pose
+      data-theme sur <html>. Clair si aucune valeur stockée.
+    -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('iroko-theme');
+          var theme  = (stored === 'dark') ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.style.colorScheme = theme;
+          var metaTheme = document.querySelector('meta[name="theme-color"]');
+          if (metaTheme) {
+            metaTheme.setAttribute('content', theme === 'dark' ? '#080C14' : '#FFFFFF');
+          }
+        } catch (_) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+    <!-- Google Fonts: Inter Tight & Satisfy -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Satisfy&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
